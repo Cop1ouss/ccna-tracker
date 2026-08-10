@@ -1,5 +1,7 @@
 # Network Access (20%)
 
+![Network Access](https://img.shields.io/badge/domain-Network%20Access-34d399) ![Weight](https://img.shields.io/badge/weight-20%25-34d399)
+
 Synthesized almost entirely from **SRWE** (c3) — this is the domain SRWE was built for. Skeleton is the checklist in [`boss-battles/02-network-access.md`](../boss-battles/02-network-access.md). Port security / DHCP snooping / DAI live in `security-fundamentals.md` instead, since that's where the boss-battle checklist puts Layer 2 security.
 
 **Legend:** ✅ well covered · ⚠️ partial · ❌ gap

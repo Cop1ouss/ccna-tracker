@@ -1,5 +1,7 @@
 # Network Fundamentals (20%)
 
+![Network Fundamentals](https://img.shields.io/badge/domain-Network%20Fundamentals-38bdf8) ![Weight](https://img.shields.io/badge/weight-20%25-38bdf8)
+
 Synthesized from `cisco-track`'s **Networking Basics** (c1), **Networking Essentials** (c2), and — where it adds something the other two miss — **SRWE** (c3). Skeleton is the checklist in [`boss-battles/01-network-fundamentals.md`](../boss-battles/01-network-fundamentals.md).
 
 **Legend:** ✅ well covered · ⚠️ partial (concept present, missing depth/commands) · ❌ gap (nothing in my notes — not invented here)

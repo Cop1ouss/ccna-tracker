@@ -1,5 +1,7 @@
 # IP Connectivity (25%) — biggest domain
 
+![IP Connectivity](https://img.shields.io/badge/domain-IP%20Connectivity-fbbf24) ![Weight](https://img.shields.io/badge/weight-25%25-fbbf24)
+
 Synthesized from **Networking Essentials** (c2) and **SRWE** (c3). Skeleton is the checklist in [`boss-battles/03-ip-connectivity.md`](../boss-battles/03-ip-connectivity.md). This domain carries the most exam weight — and it's also where my notes have their single biggest hole. Read the OSPF section below before anything else.
 
 **Legend:** ✅ well covered · ⚠️ partial · ❌ gap

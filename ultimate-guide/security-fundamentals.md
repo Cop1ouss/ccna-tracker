@@ -1,5 +1,7 @@
 # Security Fundamentals (15%)
 
+![Security Fundamentals](https://img.shields.io/badge/domain-Security%20Fundamentals-a78bfa) ![Weight](https://img.shields.io/badge/weight-15%25-a78bfa)
+
 Synthesized from **Networking Basics** (c1) and **SRWE** (c3). Skeleton is the checklist in [`boss-battles/05-security-fundamentals.md`](../boss-battles/05-security-fundamentals.md).
 
 **Important scope note:** the brief for this domain asked me to also pull from CyberOps Associate, Network Defense, Network Security, Cyber Threat Management, Endpoint Security, and Introduction to Cybersecurity for angles the CCNA courses miss. I checked — **none of these exist as built content in cisco-track.** They appear exactly once, as five bullet points in a "Junior Cybersecurity Analyst" roadmap section on the homepage, listed as a *planned future track* alongside the badges/certs they lead to. There are no modules, no objectives, no labs — just the course names as a wishlist. Everything below is Cisco networking's own security content (c1 + c3), not cybersecurity-course content, because that's genuinely all that exists to synthesize from right now.

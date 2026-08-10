@@ -1,5 +1,7 @@
 # Automation & Programmability (10%)
 
+![Automation & Programmability](https://img.shields.io/badge/domain-Automation%20%26%20Programmability-fb923c) ![Weight](https://img.shields.io/badge/weight-10%25-fb923c)
+
 Skeleton is the checklist in [`boss-battles/06-automation-programmability.md`](../boss-battles/06-automation-programmability.md). This is the thinnest domain in the entire repo by a wide margin — five of six sub-topics have no source material in cisco-track at all. Read this one in full; there isn't a "well-covered" section to skim past.
 
 **Legend:** ✅ well covered · ⚠️ partial · ❌ gap

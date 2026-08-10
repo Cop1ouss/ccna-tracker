@@ -18,9 +18,13 @@ in effect through Feb 2, 2027).
 | Path | What lives here |
 |---|---|
 | `boss-battles/` | One file per exam domain — objective checklist, XP/status tracking, missed-question log (styled after the `secplus-tracker` Agent Dajoni system) |
-| `practice-questions/` | Original practice questions with hidden-answer explanations, organized by domain |
+| `ultimate-guide/` | One synthesized study file per domain, built from cross-referencing `cisco-track`'s course notes against each boss battle's objective checklist — merged explanations, real IOS command examples, and honestly-flagged gaps where no note covers a blueprint objective |
+| `practice-questions/` | Original practice questions with hidden-answer explanations, organized by domain and weighted toward higher-blueprint-weight domains |
+| `mock-exams/` | Full-length mocks at the real domain weight distribution — questions and answer key kept in separate files so a mock can be taken cold |
 | `flashcards/ccna-core-facts.csv` | Anki-importable deck — ADs, port numbers, HTTP codes, STP/HSRP facts |
 | `scripts/subnet_drill.py` | Timed CLI subnetting quiz generator (stdlib only) |
+| `scripts/coverage.py` | Readiness dashboard — reads Status/XP from the boss battles and prints per-domain and blueprint-weighted overall readiness |
+| `scripts/sync_anki.py` | Pushes new/updated flashcards into a running Anki instance via AnkiConnect, instead of manual CSV re-import |
 | `packet-tracer-labs/` | Self-imposed Packet Tracer challenge log |
 | `gns3-topologies/` | Real(er) routing/switching topologies tied into the home lab |
 | `tryhackme-log/` | Networking-focused CTF rooms completed |
@@ -32,7 +36,15 @@ in effect through Feb 2, 2027).
 # Run a subnetting drill
 python3 scripts/subnet_drill.py -n 15
 
-# Import flashcards/ccna-core-facts.csv into Anki as a new deck
+# Check overall exam readiness (per-domain + blueprint-weighted total)
+python3 scripts/coverage.py
+
+# Push new/updated flashcards into a running Anki instance (requires the
+# AnkiConnect add-on: https://ankiweb.net/shared/info/2055492159)
+python3 scripts/sync_anki.py --dry-run   # preview
+python3 scripts/sync_anki.py             # apply
+
+# Or import flashcards/ccna-core-facts.csv into Anki manually as a new deck
 # File > Import in Anki, comma-separated, first line as header
 ```
 

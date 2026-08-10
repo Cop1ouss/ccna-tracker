@@ -1,5 +1,7 @@
 # IP Services (10%)
 
+![IP Services](https://img.shields.io/badge/domain-IP%20Services-f472b6) ![Weight](https://img.shields.io/badge/weight-10%25-f472b6)
+
 Synthesized from **Networking Basics** (c1), **Networking Essentials** (c2), and **SRWE** (c3). Skeleton is the checklist in [`boss-battles/04-ip-services.md`](../boss-battles/04-ip-services.md). This is the domain with the most individually-gapped items — several services just never come up in either course.
 
 **Legend:** ✅ well covered · ⚠️ partial · ❌ gap
