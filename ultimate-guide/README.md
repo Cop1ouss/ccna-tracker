@@ -1,3 +1,5 @@
+![CCNA Tracker banner](../assets/banner.svg)
+
 # Ultimate Guide
 
 One synthesized study file per exam domain, built by cross-referencing every relevant note across [`cisco-track`](https://github.com/Cop1ouss/cisco-track)'s courses against the objective checklist in the matching `boss-battles/*.md` file. Overlapping content is merged into one explanation per objective; real IOS command examples are kept from source notes rather than rewritten generically; anything the blueprint expects that no note actually covers is flagged as a gap, not invented.
