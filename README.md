@@ -13,6 +13,15 @@ is the hands-on, gamified, test-prep side: labs, drills, flashcards, and boss
 battles, built around the official CCNA 200-301 v1.1 blueprint (six domains,
 in effect through Feb 2, 2027).
 
+> **Heads up:** CCNA 200-301 **v2.0** goes live Feb 3, 2027, replacing v1.1
+> the day after it retires. Confirmed against Cisco's own exam-topics PDF —
+> v2.0 restructures this into **five** domains (not six) with different
+> names/weights and a much heavier troubleshoot/diagnose emphasis, plus new
+> topics (SFTP/SCP, storm control, RA guard, DNS-record troubleshooting,
+> OSPFv3, agentic AI) that this repo doesn't cover yet. Everything here still
+> targets v1.1 — a v2.0 restructure is a separate future project, not
+> something to start until you've settled your own exam timeline.
+
 ## Structure
 
 | Path | What lives here |
