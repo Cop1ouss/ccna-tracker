@@ -19,3 +19,4 @@
 |  |  |  |  |
 
 ## Notes / gaps
+ENSA (c5) 5.3–5.4 closed ACLs (ENSA-L4a/b, standard + extended + wildcard math), AAA (ENSA-L3, local auth), and added VPN concepts + RADIUS-vs-TACACS+ comparison. Still no TACACS+ CLI config or EAP method names (EAP-TLS/PEAP/EAP-FAST) anywhere in cisco-track. See `ultimate-guide/security-fundamentals.md`.

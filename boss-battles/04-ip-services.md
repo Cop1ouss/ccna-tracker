@@ -21,3 +21,4 @@
 |  |  |  |  |
 
 ## Notes / gaps
+ENSA (c5) closed most of this domain: NAT CLI (5.5, ENSA-L5a/b), NTP + syslog + read-only SNMP (5.6, ENSA-L6), and QoS concepts (5.7). Still no source material for FTP or SNMP beyond read-only community strings (MIB/OID/traps). See `ultimate-guide/ip-services.md`.

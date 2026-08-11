@@ -18,3 +18,4 @@
 |  |  |  |  |
 
 ## Notes / gaps
+Source material for OSPFv2 (concepts, config, verification) now exists — Course 05 (ENSA) 5.1–5.2, labs ENSA-L1/L2a/L2b. Was the single biggest gap in the repo; now the strongest domain. See `ultimate-guide/ip-connectivity.md` for the full writeup.

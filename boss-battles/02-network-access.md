@@ -20,3 +20,4 @@
 |  |  |  |  |
 
 ## Notes / gaps
+ENSA (c5) 5.7 adds general QoS concepts (marking, queuing, congestion management), but WLAN-specific QoS profile config still has no source material. CDP/LLDP, EtherChannel PAgP/load-balancing, STP guard features, and WLC deployment models are untouched by Course 05. See `ultimate-guide/network-access.md`.
