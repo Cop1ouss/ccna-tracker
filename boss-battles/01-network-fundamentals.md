@@ -1,7 +1,7 @@
 # Boss: Network Fundamentals (20%)
 
-**Status:** In progress
-**XP:** 50 / 1000
+**Status:** Not started
+**XP:** 0 / 1000
 **Practice score:** —
 
 ## Sub-topics
@@ -19,7 +19,7 @@
 ## Missed-question log
 | Date | Question | Why I picked wrong answer | Tag (repeat/regression/new) |
 |---|---|---|---|
-| 2026-08-09 | What determines the OSPF router ID if not manually set? | Forgot loopback interfaces take priority over physical interfaces | new |
+|  |  |  |  |
 
 ## Notes / gaps
 Checked ENSA (c5) against this domain when Course 05 shipped — no overlap. SFP/SFP+, anycast, two-tier/spine-leaf, containers, speed/duplex CLI, and `show interfaces` all still have no source material. See `ultimate-guide/network-fundamentals.md`.

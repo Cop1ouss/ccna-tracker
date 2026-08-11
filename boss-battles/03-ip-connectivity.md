@@ -1,7 +1,7 @@
 # Boss: IP Connectivity (25%) — biggest domain, prioritize this
 
-**Status:** Not started
-**XP:** 0 / 1000
+**Status:** In progress
+**XP:** 100 / 1000
 **Practice score:** —
 
 ## Sub-topics
@@ -15,7 +15,7 @@
 ## Missed-question log
 | Date | Question | Why I picked wrong answer | Tag (repeat/regression/new) |
 |---|---|---|---|
-|  |  |  |  |
+| 2026-08-09 | What determines the OSPF router ID if not manually set? | Forgot loopback interfaces take priority over physical interfaces | new |
 
 ## Notes / gaps
 Source material for OSPFv2 (concepts, config, verification) now exists — Course 05 (ENSA) 5.1–5.2, labs ENSA-L1/L2a/L2b. Was the single biggest gap in the repo; now the strongest domain. See `ultimate-guide/ip-connectivity.md` for the full writeup.
