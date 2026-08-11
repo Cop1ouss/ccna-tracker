@@ -2,21 +2,19 @@
 
 ![IP Services](https://img.shields.io/badge/domain-IP%20Services-f472b6) ![Weight](https://img.shields.io/badge/weight-10%25-f472b6)
 
-Synthesized from **Networking Basics** (c1), **Networking Essentials** (c2), and **SRWE** (c3). Skeleton is the checklist in [`boss-battles/04-ip-services.md`](../boss-battles/04-ip-services.md). This is the domain with the most individually-gapped items — several services just never come up in either course.
+Synthesized from **Networking Basics** (c1), **Networking Essentials** (c2), **SRWE** (c3), and **ENSA** (c5). Skeleton is the checklist in [`boss-battles/04-ip-services.md`](../boss-battles/04-ip-services.md). Course 05 closed most of what used to be this domain's most individually-gapped items — NAT, NTP, and SNMP/syslog all shipped with ENSA.
 
 **Legend:** ✅ well covered · ⚠️ partial · ❌ gap
 
 ---
 
-## ⚠️ NAT: static, dynamic, and PAT (port address translation)
+## ✅ NAT: static, dynamic, and PAT (port address translation)
 
-**c1 1.5 (Connect to the Internet)** covers NAT at the conceptual level only — it's a named topic ("NAT overview") and a stated objective ("Describe NAT conceptually"), framed as *why* a home router hides private addresses behind one public IP.
+**c1 1.5 (Connect to the Internet)** covers NAT at the conceptual level ("Describe NAT conceptually"), and **ENSA 5.5 (NAT for IPv4)** now takes it all the way to IOS config: `ip nat inside`/`ip nat outside`, static NAT (one-to-one), dynamic NAT (pool + access-list match), and PAT/overload, verified with `show ip nat translations`. **ENSA-L5a** builds static + dynamic NAT for an internal server and a shared pool; **ENSA-L5b** does PAT for a whole subnet sharing one public IP. NAT CLI syntax is no longer untested.
 
-❌ **Gap:** no course ever configures NAT on IOS. I searched every lab guide for `ip nat inside`/`ip nat outside`/`ip nat inside source` and found nothing — the concept is understood at the "what and why" level but there's no worked static NAT, dynamic NAT (with an access-list + pool), or PAT/overload configuration anywhere in cisco-track. This repo's own `practice-questions/network-access-services-security-automation.md` Q3 tests PAT recognition conceptually, but that question isn't sourced from cisco-track notes — it's outside knowledge already in the practice bank. Treat NAT CLI syntax as untested.
+## ✅ NTP: client/server configuration
 
-## ❌ NTP: client/server configuration
-
-**Real gap** — NTP does not appear anywhere in cisco-track, not as a topic, not as a lab, not as a passing mention. No `ntp server`, no `show clock`, no `show ntp status`. Needs to be learned from scratch.
+**Closed by ENSA 5.6 (Network Services: NTP, SNMP, Syslog)** — `ntp server` client config and `show ntp status` are both taught, framed correctly as the prerequisite that has to come first before SNMP/syslog make sense (so logs and monitoring data actually correlate). **ENSA-L6** configures a router/switch to point at an NTP server as part of the combined services lab.
 
 ## ✅ DHCP: client and relay concepts, DHCP options basics
 
@@ -43,13 +41,13 @@ The pool's `default-router`/`dns-server` lines *are* DHCP options in practice (o
 
 **c2 2.11 (Application Layer Services & Network Testing)** covers DNS resolution and record types (A, AAAA, MX, CNAME) alongside HTTPS/TLS 1.3 and email protocols, and **NE-L11a** builds a working DHCP+DNS+HTTP service stack — a client gets an address, resolves a name, and loads a page, which is DNS's actual operational role rather than just definitions. Good conceptual-to-practical bridge.
 
-## ❌ SNMP: basic operation and use case
+## ⚠️ SNMP: basic operation and use case
 
-**Real gap** — zero mentions anywhere in cisco-track. No community strings, no `snmp-server` commands, no MIB/OID/trap vocabulary. Needs outside study.
+**Closed at the read-only level by ENSA 5.6** — `snmp-server community` (read-only) is now taught and configured in **ENSA-L6**. Still not covered: full MIB/OID/trap vocabulary and write/RW community strings — the module deliberately stays at "basic monitoring," so know the deeper SNMP internals from the practice bank / outside material if the exam pushes past read-only basics.
 
-## ❌ Syslog: severity levels, use case
+## ✅ Syslog: severity levels, use case
 
-**Real gap** in cisco-track specifically — no `logging` commands, no severity-level table, nothing. Worth noting: this repo's own `practice-questions/network-access-services-security-automation.md` Q4 already tests syslog severity 7 = Debugging correctly, but that question predates this synthesis and isn't traceable to cisco-track notes — it's accurate, just not something these notes taught. Learn syslog severity 0–7 from outside material; the practice question is a good self-check once you have.
+**Closed by ENSA 5.6** — `logging host` + `logging trap`, plus the severity 0–7 scale, are now taught content, configured in **ENSA-L6** capped at Warning severity. This matches (and now sources) `practice-questions` Q4's "severity 7 = Debugging" from actual course material instead of the practice bank alone.
 
 ## ✅ SSH: configuration and why it replaces Telnet
 
@@ -67,9 +65,9 @@ line vty 0 4
 
 The repeated emphasis across both courses — SSH v2 only, local user auth, Telnet never enabled — means this isn't just "known," it's drilled as the default posture for every device built in these labs.
 
-## ❌ QoS: basic concepts — marking, queuing, congestion management
+## ⚠️ QoS: basic concepts — marking, queuing, congestion management
 
-**Confirmed full gap**, and the same one already flagged in `network-access.md`'s WLAN section — QoS does not appear anywhere in cisco-track at all, conceptual or configured. No marking (DSCP/CoS), no queuing models, no congestion-management vocabulary. This is a from-scratch topic for the exam.
+**Concept-level gap closed by ENSA 5.7 (QoS Concepts)** — trust boundary + marking (DSCP/CoS), queuing strategies (FIFO vs. priority/weighted), and congestion management vs. avoidance are all now taught, matching what the exam actually wants here (explain QoS, not configure a policy-map — the module has zero labs by design). Same still applies to the WLAN-side QoS-profile mention in `network-access.md`: the *concept* is covered, but there's still no hands-on config anywhere in cisco-track.
 
 ## ⚠️ TFTP/FTP: file transfer use cases (IOS image/config backup)
 
@@ -90,14 +88,14 @@ copy tftp: running-config
 
 | Sub-topic | Status |
 |---|---|
-| NAT (static/dynamic/PAT) | ⚠️ concept only, no CLI |
-| NTP | ❌ |
+| NAT (static/dynamic/PAT) | ✅ (closed by ENSA 5.5) |
+| NTP | ✅ (closed by ENSA 5.6) |
 | DHCP (client/relay/options) | ✅ |
 | DNS | ✅ |
-| SNMP | ❌ |
-| Syslog | ❌ (self-check question exists but isn't sourced from notes) |
+| SNMP | ⚠️ (read-only closed by ENSA 5.6; MIB/OID/trap depth still outside) |
+| Syslog | ✅ (closed by ENSA 5.6) |
 | SSH (vs. Telnet) | ✅ |
-| QoS | ❌ |
+| QoS | ⚠️ (concept closed by ENSA 5.7; no hands-on config anywhere) |
 | TFTP/FTP | ⚠️ (TFTP ✅, FTP ❌) |
 
-**Real gaps to close before test day:** NAT CLI configuration (static/dynamic/PAT), NTP, SNMP, syslog, QoS, and FTP. That's five of nine sub-topics with no source material at all — despite being only 10% of the exam, this domain needs the most outside-source work per point of weight of any domain in the blueprint.
+**Real gaps left before test day:** FTP (still zero content anywhere) and the deeper SNMP vocabulary (MIB/OID/traps beyond read-only community strings). Everything else in this domain — NAT, NTP, DHCP, DNS, SSH, syslog, and QoS concepts — now has real source material after Course 05 shipped.

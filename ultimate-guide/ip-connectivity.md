@@ -2,7 +2,7 @@
 
 ![IP Connectivity](https://img.shields.io/badge/domain-IP%20Connectivity-fbbf24) ![Weight](https://img.shields.io/badge/weight-25%25-fbbf24)
 
-Synthesized from **Networking Essentials** (c2) and **SRWE** (c3). Skeleton is the checklist in [`boss-battles/03-ip-connectivity.md`](../boss-battles/03-ip-connectivity.md). This domain carries the most exam weight — and it's also where my notes have their single biggest hole. Read the OSPF section below before anything else.
+Synthesized from **Networking Essentials** (c2), **SRWE** (c3), and **ENSA** (c5). Skeleton is the checklist in [`boss-battles/03-ip-connectivity.md`](../boss-battles/03-ip-connectivity.md). This is the highest-weighted domain in the exam, and now the strongest — OSPF, its former single biggest gap, was closed when Course 05 (ENSA) shipped.
 
 **Legend:** ✅ well covered · ⚠️ partial · ❌ gap
 
@@ -44,20 +44,13 @@ ip route 10.0.2.0 255.255.255.0 10.0.99.2 5
 ```
 Verification pattern is consistent throughout: `show ip route` / `show ipv6 route`, confirm only the AD-1 (or lower) route is installed while the primary path is up, confirm the backup installs automatically on failure.
 
-## ❌ Single-area OSPFv2: neighbor adjacency, DR/BDR election, router ID, passive interfaces
+## ✅ Single-area OSPFv2: neighbor adjacency, DR/BDR election, router ID, passive interfaces
 
-**This is the largest single gap in the entire repo relative to how much the exam weights it.** I checked every course module and every lab guide: **"OSPF" appears exactly zero times as taught content anywhere in cisco-track.** The only two mentions of OSPF in the whole tracker are both *stretch-goal "challenge" suggestions* tacked onto the end of two labs —
+**Closed by ENSA 5.1–5.2.** Previously the largest single gap in the repo — c2/c3 only ever mentioned OSPF as an optional stretch-goal on NE-L9 and SRWE-CAP, never as guided instruction. Course 05's **5.1 (Single-Area OSPFv2 Concepts)** now teaches the neighbor state machine (Down → Init → 2-Way → ExStart → Exchange → Loading → Full), why DR/BDR election happens on multi-access segments, router-ID selection order, and when a passive interface is the right call — with **ENSA-L1** stepping through adjacency formation packet-by-packet in Simulation mode. **5.2 (Configuration & Verification)** takes it hands-on: `router ospf` + `network` + wildcard mask, manual router-id/priority tuning, `passive-interface`/`passive-interface default` — drilled across **ENSA-L2a** (basic three-router single-area OSPF) and **ENSA-L2b** (passive interfaces + router-ID control via loopbacks + forced DR/BDR election). The old NE-L9/SRWE-CAP "swap static for OSPF" stretch goals are now backed by real guided content instead of being pure outside-study prompts.
 
-- NE-L9 (Static Routing Across Three Routers): *"Replace all static routes with OSPF single-area and compare the routing tables."*
-- SRWE-CAP (the SRWE capstone): *"Swap static routing for OSPF and add a second WAN link as a backup path."*
+## ✅ OSPF verification: `show ip ospf neighbor`, `show ip route ospf`, `show ip protocols`
 
-Both are framed as *optional extensions for after the lab*, not guided instruction — there's no walkthrough of `router ospf`, `network` statements with wildcard masks, neighbor states (Down→Init→2-Way→ExStart→Exchange→Loading→Full), DR/BDR election on multi-access segments, router-id selection, or passive-interface configuration anywhere. My own practice question bank has one OSPF question (2-WAY/DROTHER behavior), but it's testing a concept I clearly know from outside study, not from these notes.
-
-**Bottom line:** neighbor adjacency, DR/BDR election, router ID, and passive interfaces all need to be learned from an outside source (Jeremy's IT Lab's OSPF series is the obvious fit given it's already your primary video resource) — nothing here to cross-reference.
-
-## ❌ OSPF verification: `show ip ospf neighbor`, `show ip route ospf`, `show ip protocols`
-
-Direct consequence of the gap above — none of these three commands appear anywhere in my notes. No `show` output to compare against, no sample neighbor table, no `show ip protocols` field walkthrough. Full gap, needs to be built from scratch alongside the OSPF concept study above.
+Also closed by ENSA 5.2 — all three commands are named explicitly in the module's objectives and topics list, and verified end-to-end in ENSA-L2a/L2b (full adjacency + complete routing table) plus the ENSA capstone (5.10), which layers OSPF across 3+ routers alongside ACLs and NAT on one topology.
 
 ## ✅ First-hop redundancy: HSRP concepts (active/standby, priority, preemption)
 
@@ -87,9 +80,9 @@ The lab's verification steps explicitly confirm the two behaviors the exam likes
 |---|---|
 | Routing table / AD / longest-match | ✅ |
 | Static routing (IPv4/IPv6, default, floating) | ✅ |
-| Single-area OSPFv2 | ❌ **zero content — largest gap in the repo** |
-| OSPF verification commands | ❌ |
+| Single-area OSPFv2 | ✅ (closed by ENSA 5.1–5.2) |
+| OSPF verification commands | ✅ (closed by ENSA 5.2) |
 | HSRP (FHRP) | ✅ |
 | Routing table reading under pressure | ✅ (untimed) |
 
-**Real gaps to close before test day:** all of OSPFv2 — this alone is worth studying as if it were its own domain, given IP Connectivity is 25% of the exam and OSPF is roughly half of what this domain normally tests. Everything else in this domain (static routing, HSRP, routing-table literacy) is genuinely strong.
+**No real gaps left in this domain.** Static routing, HSRP, routing-table literacy, and now OSPFv2 (concepts, config, and verification) are all backed by real course content. The one thing still worth doing yourself: timed practice — routing-table reading under pressure is covered but untimed.

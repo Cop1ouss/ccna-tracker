@@ -2,33 +2,31 @@
 
 ![Automation & Programmability](https://img.shields.io/badge/domain-Automation%20%26%20Programmability-fb923c) ![Weight](https://img.shields.io/badge/weight-10%25-fb923c)
 
-Skeleton is the checklist in [`boss-battles/06-automation-programmability.md`](../boss-battles/06-automation-programmability.md). This is the thinnest domain in the entire repo by a wide margin — five of six sub-topics have no source material in cisco-track at all. Read this one in full; there isn't a "well-covered" section to skim past.
+Synthesized from **ENSA** (c5) — this domain had no source material at all until Course 05 shipped. Skeleton is the checklist in [`boss-battles/06-automation-programmability.md`](../boss-battles/06-automation-programmability.md). Four of six sub-topics are now covered; Terraform and AI/ML in network ops are the remaining from-scratch items.
 
 **Legend:** ✅ well covered · ⚠️ partial · ❌ gap
 
 ---
 
-## ❌ Impact of automation on traditional network management
+## ⚠️ Impact of automation on traditional network management
 
-**Real gap.** No module in any course discusses how automation changes day-to-day network operations (fewer manual CLI touches, config drift, intent-based networking, etc.). Nothing to cross-reference.
+Still not taught head-on as its own objective (fewer manual CLI touches, config drift, intent-based networking aren't named explicitly anywhere), but **ENSA 5.8**'s traditional-vs-controller-based comparison and **5.9**'s automation modules both frame the *operational* cost difference — **ENSA-L8** has you write out, step by step, what a config change costs under per-device CLI vs. a hypothetical controller push. That's the practical substance of this objective even without the vocabulary ("config drift," "intent-based networking") attached to it. Know those two terms from outside material if the exam names them directly.
 
-## ⚠️ Traditional (device-by-device) vs. controller-based/SDN architectures
+## ✅ Traditional (device-by-device) vs. controller-based/SDN architectures
 
-The one item in this domain with *something* behind it. **c2 2.12 (Network Design, Cloud & Virtualization)** lists *"Explain virtualization and SDN at a high level"* as a stated learning objective, and its topic list names cloud-managed networking platforms — Meraki and Catalyst Center — as the v1.1-blueprint-aligned example of controller-based management.
+**Closed by ENSA 5.8 (Network Architecture: Traditional vs. Controller-Based)** — a dedicated module now contrasts traditional device-by-device CLI management against controller-based/SDN, explains control/data-plane centralization, names northbound vs. southbound APIs (concept-level), and identifies Cisco's controller platforms (DNA Center / Catalyst Center, Meraki). **ENSA-L8** documents the operational tradeoff across a 10-device topology. This is the general SDN/controller-based-networking concept the blueprint means here — separate from the WLC-specific autonomous-vs-controller-based AP architecture already covered in `network-access.md`.
 
-❌ But there's a real gap underneath that objective: the topic list itself never actually names "SDN," never contrasts it against traditional device-by-device CLI management, and never explains what a network controller *does* differently (centralized policy push, southbound/northbound APIs, abstraction from per-device config). Autonomous-vs-controller-based **AP** architecture is well covered (see `network-access.md`), but that's WLC-specific, not the general SDN/controller-based-networking concept the blueprint means here — don't let familiarity with WLC deployment models substitute for this.
+## ✅ REST-based APIs: CRUD operations, HTTP verbs (GET/POST/PUT/DELETE), common response codes
 
-## ❌ REST-based APIs: CRUD operations, HTTP verbs (GET/POST/PUT/DELETE), common response codes
+**Closed by ENSA 5.9 (Network Automation & Programmability)** — GET/POST/PUT/DELETE and common response codes (200/401/404/500) are now taught, and **ENSA-L9a** makes it hands-on: register for a free Cisco DevNet Sandbox account and send a real GET request (via Postman or curl) to an always-on IOS-XE device, then read the JSON response. This also now sources `practice-questions` Q7's HTTP 404 question from real course material instead of the bank alone.
 
-**Full gap** in cisco-track — no module, topic, or lab touches REST, HTTP verbs, or status codes. Worth flagging: this repo's own `practice-questions/network-access-services-security-automation.md` Q7 already tests HTTP 404 correctly, but that question is pre-existing content in the practice bank, not something traceable to a cisco-track note. It's a good self-check once you've actually studied this from an outside source — not evidence the topic is covered.
+## ⚠️ Configuration management tools: Ansible and Terraform
 
-## ❌ Configuration management tools: Ansible and Terraform
+**Ansible closed by ENSA 5.9** — agentless (SSH-based), YAML playbooks, and why it's agentless are all taught, with **ENSA-L9b** running an actual two-task playbook (using the `cisco.ios` collection) against a DevNet Sandbox device to gather facts. This also sources `practice-questions` Q8's "Ansible is agentless" from real content now. **Terraform is still a full gap** — not mentioned anywhere in cisco-track, push-vs-pull and HCL syntax remain outside-study topics.
 
-**Full gap.** Neither tool is mentioned anywhere in cisco-track — not agentless-vs-agent-based, not push-vs-pull, not YAML/HCL syntax. Same caveat as above: `practice-questions` Q8 already correctly tests "Ansible is agentless," but that's bank content, not cisco-track content.
+## ✅ JSON data encoding: reading and interpreting simple JSON objects
 
-## ❌ JSON data encoding: reading and interpreting simple JSON objects
-
-**Full gap as *taught* content.** JSON does technically appear in cisco-track — but only inside the tracker app's own `index.html` JavaScript, where it calls `JSON.parse()`/`JSON.stringify()` to save your lab-completion progress to `localStorage`. That's the tracker's plumbing, not a networking lesson — no module ever presents a sample JSON API response and asks you to read a key/value pair out of it, which is what the blueprint actually tests.
+**Closed as taught content by ENSA 5.9** — beyond the tracker app's own `JSON.parse()`/`JSON.stringify()` plumbing, the module now has you read and interpret a real JSON API response from the DevNet Sandbox GET request in ENSA-L9a, which is exactly the key/value-reading skill the blueprint tests.
 
 ## ❌ AI/ML in network operations: generative and predictive use cases (new in v1.1 blueprint)
 
@@ -40,11 +38,11 @@ The one item in this domain with *something* behind it. **c2 2.12 (Network Desig
 
 | Sub-topic | Status |
 |---|---|
-| Automation's impact on network management | ❌ |
-| Traditional vs. controller-based/SDN | ⚠️ objective named, no real depth |
-| REST APIs (CRUD, verbs, response codes) | ❌ |
-| Ansible / Terraform | ❌ |
-| JSON encoding | ❌ (only exists as app plumbing, not a lesson) |
+| Automation's impact on network management | ⚠️ (practical substance covered via ENSA-L8; terminology not named) |
+| Traditional vs. controller-based/SDN | ✅ (closed by ENSA 5.8) |
+| REST APIs (CRUD, verbs, response codes) | ✅ (closed by ENSA 5.9) |
+| Ansible / Terraform | ⚠️ (Ansible ✅ closed by ENSA 5.9, Terraform ❌) |
+| JSON encoding | ✅ (closed by ENSA 5.9 — real API response, not just app plumbing) |
 | AI/ML in network ops | ❌ |
 
-**Real gaps to close before test day:** essentially this entire domain. Of the six sub-topics, one has a bare objective mention and the other five have nothing. Given this is 10% of the exam — the same weight as IP Services, which at least had DHCP/DNS/SSH solid — this domain should be treated as a from-scratch study block, not a review pass. It's also the strongest case in the whole repo for building an actual course module: right now "Automation & Programmability" exists as an exam-blueprint line item and nothing else in cisco-track.
+**Real gaps left before test day:** Terraform (push vs. pull, HCL) and AI/ML in network ops (v1.1's newest blueprint addition — still not written into any module, despite the tracker's own metadata claiming v1.1 alignment). Everything else in this domain — SDN/controller-based architecture, REST APIs, Ansible, and JSON — went from zero source material to real course content once Course 05 shipped. This is no longer the thinnest domain in the repo.
