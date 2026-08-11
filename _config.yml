@@ -1,0 +1,5 @@
+theme: jekyll-theme-hacker
+title: CCNA Tracker
+description: Boss battles, ultimate guides, mock exams, and gamified test-prep for CCNA 200-301 v1.1 — companion to cisco-track.
+show_downloads: true
+markdown: kramdown
