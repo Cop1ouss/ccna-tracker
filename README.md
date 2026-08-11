@@ -2,6 +2,8 @@
 
 # CCNA Tracker — Study & Test Prep Repo
 
+**[Browse the guide →](https://cop1ouss.github.io/ccna-tracker/)**
+
 ![Exam](https://img.shields.io/badge/exam-200--301-38bdf8)
 ![Status](https://img.shields.io/badge/status-in--progress-fbbf24)
 ![Domains](https://img.shields.io/badge/domains-6%2F6-34d399)
