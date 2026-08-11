@@ -2,7 +2,7 @@
 
 ![Network Access](https://img.shields.io/badge/domain-Network%20Access-34d399) ![Weight](https://img.shields.io/badge/weight-20%25-34d399)
 
-Synthesized almost entirely from **SRWE** (c3) — this is the domain SRWE was built for. Skeleton is the checklist in [`boss-battles/02-network-access.md`](../boss-battles/02-network-access.md). Port security / DHCP snooping / DAI live in `security-fundamentals.md` instead, since that's where the boss-battle checklist puts Layer 2 security.
+Synthesized almost entirely from **SRWE** (c3) — this is the domain SRWE was built for. Skeleton is the checklist in [`boss-battles/02-network-access.md`](../boss-battles/02-network-access.md). Port security / DHCP snooping / DAI live in `security-fundamentals.md` instead, since that's where the boss-battle checklist puts Layer 2 security. Checked **ENSA** (c5) against this domain too — the only overlap is general QoS concepts (see the WLAN QoS-profile item below); CDP/LLDP, EtherChannel, STP protection features, and WLC deployment models remain untouched by Course 05.
 
 **Legend:** ✅ well covered · ⚠️ partial · ❌ gap
 
@@ -101,7 +101,7 @@ BPDU Guard is fully covered (see command block above). **Root Guard** is *named*
 
 **c3 3.13 + labs SRWE-L13a/b** match the "GUI-based" framing in the checklist exactly — these are WLC GUI walkthroughs (register an AP, create a WPA3-Personal WLAN, map a second WLAN to a VLAN with WPA3-Enterprise/802.1X), not CLI. SSID creation and the WPA2→WPA3 shift are solid, with the correct 2026 framing (WPA3 default, WPA2 legacy fallback, WPA3-Enterprise using 802.1X rather than PSK).
 
-❌ **Gap:** **QoS profile basics** — nothing in either WLAN module. This is actually part of a broader pattern: **QoS doesn't appear anywhere in the entire repo**, not just here (it resurfaces as a full gap in `ip-services.md` too).
+⚠️ **Gap:** **QoS profile basics** — nothing in either WLAN module, and ENSA doesn't cover WLAN-specific QoS profiles either. The general concept is no longer a full gap, though — **ENSA 5.7 (QoS Concepts)** now covers marking (DSCP/CoS), queuing, and congestion management at the concept level (see `ip-services.md`), so the vocabulary is real content now, but a WLAN QoS profile specifically still has no source material.
 
 ---
 
@@ -116,6 +116,6 @@ BPDU Guard is fully covered (see command block above). **Root Guard** is *named*
 | STP core (root election, port roles, PortFast, BPDU guard) | ✅ |
 | STP protection (root/loop guard, BPDU filter/guard) | ⚠️ (only BPDU guard has a command; root guard concept-only; loop guard + BPDU filter ❌) |
 | Wireless architectures (autonomous/lightweight, WLC models) | ⚠️ (WLC deployment models not named) |
-| WLAN config GUI (SSID, WPA2/3, QoS) | ⚠️ (QoS profile ❌) |
+| WLAN config GUI (SSID, WPA2/3, QoS) | ⚠️ (general QoS ✅ via ENSA 5.7, WLAN-specific QoS profile ❌) |
 
-**Real gaps to close before test day:** CDP/LLDP verification commands, LACP passive mode + PAgP + channel mismatch scenarios, EtherChannel load balancing, root guard/loop guard/BPDU filter commands, the three WLC deployment models, QoS profiles on a WLAN.
+**Real gaps to close before test day:** CDP/LLDP verification commands, LACP passive mode + PAgP + channel mismatch scenarios, EtherChannel load balancing, root guard/loop guard/BPDU filter commands, the three WLC deployment models, and WLAN-specific QoS profile configuration (general QoS concepts are now covered via ENSA, this domain's gap is just the WLAN-profile application of it).
