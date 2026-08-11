@@ -18,4 +18,4 @@
 |  |  |  |  |
 
 ## Notes / gaps
-ENSA (c5) 5.8–5.9 closed SDN/controller-based architecture (ENSA-L8), REST APIs + JSON (ENSA-L9a, DevNet Sandbox), and Ansible (ENSA-L9b). This was the thinnest domain in the repo — no longer. Still no source material for Terraform or AI/ML in network ops (v1.1's newest blueprint addition). See `ultimate-guide/automation-programmability.md`.
+ENSA (c5) 5.8–5.9 closed SDN/controller-based architecture (ENSA-L8), REST APIs + JSON (ENSA-L9a, DevNet Sandbox), and Ansible (ENSA-L9b). Terraform and AI/ML in network ops (v1.1's newest blueprint addition) were the last two gaps — written in directly as outside-study material 2026-08-11. This was the thinnest domain in the repo — now fully covered. See `ultimate-guide/automation-programmability.md`.

@@ -41,9 +41,30 @@ The pool's `default-router`/`dns-server` lines *are* DHCP options in practice (o
 
 **c2 2.11 (Application Layer Services & Network Testing)** covers DNS resolution and record types (A, AAAA, MX, CNAME) alongside HTTPS/TLS 1.3 and email protocols, and **NE-L11a** builds a working DHCP+DNS+HTTP service stack — a client gets an address, resolves a name, and loads a page, which is DNS's actual operational role rather than just definitions. Good conceptual-to-practical bridge.
 
-## ⚠️ SNMP: basic operation and use case
+## ✅ SNMP: basic operation and use case
 
-**Closed at the read-only level by ENSA 5.6** — `snmp-server community` (read-only) is now taught and configured in **ENSA-L6**. Still not covered: full MIB/OID/trap vocabulary and write/RW community strings — the module deliberately stays at "basic monitoring," so know the deeper SNMP internals from the practice bank / outside material if the exam pushes past read-only basics.
+**Read-only closed by ENSA 5.6** — `snmp-server community` (read-only) is taught and configured in **ENSA-L6**. The rest below is an **outside-study addition** (no cisco-track lab backs it — added directly since it's stable, well-documented material, not something that needs a hands-on lab to get right):
+
+**MIB (Management Information Base)** — a hierarchical, tree-structured database of every variable a device exposes for monitoring (interface counters, CPU load, temperature, uptime). Vendors and standards bodies define which variables exist and where they sit in the tree.
+
+**OID (Object Identifier)** — the dotted-numeric address of one specific variable inside that tree, e.g. `1.3.6.1.2.1.1.3.0` = `sysUpTime`. SNMP GET/GETNEXT/GETBULK requests reference OIDs directly; a MIB file is just the human-readable map that turns numbers into names like `ifInOctets`.
+
+**SNMP versions** (a real exam-testable distinction):
+- **v1** — original, community-string auth only (plaintext), no GETBULK.
+- **v2c** — adds GETBULK (pull many OIDs in one request) and better error handling, still plaintext community strings.
+- **v3** — adds real security: per-user authentication (MD5/SHA) and optional encryption (DES/AES). The only version with actual confidentiality/integrity — v1/v2c community strings are visible to anyone sniffing the segment.
+
+**Polling vs. traps** — the operational distinction the exam cares about: *polling* is manager-initiated (NMS asks a device for a value on a schedule); a *trap* is device-initiated and unsolicited (the device pushes a notification the instant something crosses a threshold, e.g. an interface goes down), so traps get you faster alerting than polling alone.
+
+```
+snmp-server community public RO
+snmp-server community private RW
+snmp-server host 10.1.1.50 version 2c public
+snmp-server enable traps
+snmp-server contact netops@example.com
+snmp-server location "NOC Rack 3"
+```
+`RO`/`RW` on the community line is the write-access distinction ENSA's read-only-only lab doesn't show — `RW` lets a manager *set*, not just *get*, values, which is why RW community strings are a real security liability if left at defaults.
 
 ## ✅ Syslog: severity levels, use case
 
@@ -69,7 +90,7 @@ The repeated emphasis across both courses — SSH v2 only, local user auth, Teln
 
 **Concept-level gap closed by ENSA 5.7 (QoS Concepts)** — trust boundary + marking (DSCP/CoS), queuing strategies (FIFO vs. priority/weighted), and congestion management vs. avoidance are all now taught, matching what the exam actually wants here (explain QoS, not configure a policy-map — the module has zero labs by design). Same still applies to the WLAN-side QoS-profile mention in `network-access.md`: the *concept* is covered, but there's still no hands-on config anywhere in cisco-track.
 
-## ⚠️ TFTP/FTP: file transfer use cases (IOS image/config backup)
+## ✅ TFTP/FTP: file transfer use cases (IOS image/config backup)
 
 **TFTP is solid** — **SRWE-L1b** walks through the exact operational pattern the exam cares about (backup before risky changes, restore after a wipe):
 
@@ -80,7 +101,15 @@ copy startup-config tftp:
 copy tftp: running-config
 ```
 
-❌ **FTP itself is a gap** — the boss-battle checklist pairs TFTP with FTP, but FTP never appears anywhere in cisco-track. Know that FTP is the connection-oriented, authenticated alternative to TFTP's simple/unauthenticated UDP transfer, but there's no worked example to point to.
+**FTP — outside-study addition** (no cisco-track lab backs this, added directly): where TFTP is UDP/69, unauthenticated, and has no directory listing or delete capability, **FTP is TCP-based, authenticated (username/password), and connection-oriented** — control connection on port 21, a separate data connection on port 20 (active mode) or a server-assigned port (passive mode, the one that actually works through NAT/firewalls, which is why it's the default almost everywhere today). The IOS syntax mirrors TFTP's `copy` pattern, just with credentials supplied first:
+
+```
+ip ftp username admin
+ip ftp password Cisc0!
+copy running-config ftp://10.1.1.10/backup-config.txt
+copy ftp://10.1.1.10/ios-image.bin flash:
+```
+Exam framing: TFTP is the "quick and simple, same-subnet lab" tool; FTP is the "authenticated, routable, production" tool — pick FTP when the scenario mentions credentials, security, or a file transfer across a WAN link.
 
 ---
 
@@ -92,10 +121,10 @@ copy tftp: running-config
 | NTP | ✅ (closed by ENSA 5.6) |
 | DHCP (client/relay/options) | ✅ |
 | DNS | ✅ |
-| SNMP | ⚠️ (read-only closed by ENSA 5.6; MIB/OID/trap depth still outside) |
+| SNMP | ✅ (read-only via ENSA 5.6; MIB/OID/version/trap depth added directly below) |
 | Syslog | ✅ (closed by ENSA 5.6) |
 | SSH (vs. Telnet) | ✅ |
 | QoS | ⚠️ (concept closed by ENSA 5.7; no hands-on config anywhere) |
-| TFTP/FTP | ⚠️ (TFTP ✅, FTP ❌) |
+| TFTP/FTP | ✅ (TFTP via SRWE-L1b, FTP added directly below) |
 
-**Real gaps left before test day:** FTP (still zero content anywhere) and the deeper SNMP vocabulary (MIB/OID/traps beyond read-only community strings). Everything else in this domain — NAT, NTP, DHCP, DNS, SSH, syslog, and QoS concepts — now has real source material after Course 05 shipped.
+**No real gaps left in this domain.** The only remaining soft spot is QoS — concepts are covered (ENSA 5.7) but there's still no hands-on config anywhere in cisco-track, which matches what the exam actually tests here (explain, don't configure).

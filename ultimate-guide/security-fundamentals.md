@@ -18,11 +18,28 @@ Good two-course arc. **c1 1.7 (Network Security Basics)** covers threats at the 
 
 **c3 3.10** names AAA/802.1X as a topic, and **ENSA 5.3 (Network Security: AAA, RADIUS/TACACS+, VPN Concepts)** now breaks it down and configures it: `aaa new-model` + a local user database, with AAA login enforced on console and VTY lines instead of a flat password. **ENSA-L3** is the hands-on version of exactly this. Accounting itself is still concept-level (no `aaa accounting` config), but authentication and authorization are both real IOS commands now, not just a named objective.
 
-## ⚠️ Password/access policies: complexity, MFA, RADIUS vs. TACACS+ (conceptual)
+## ✅ Password/access policies: complexity, MFA, RADIUS vs. TACACS+ (conceptual)
 
 **c1 1.7** explicitly names strong authentication and MFA as a learning objective, and every device-config lab across c2/c3 (NE-CAP-a, SRWE-L1a) reinforces the *habit* of strong passwords (`enable secret`, `service password-encryption`).
 
-✅ **RADIUS vs. TACACS+ comparison closed by ENSA 5.3** — encryption scope, transport, and AAA separation are now explicitly taught and compared, on top of SRWE-L13b's earlier passing WPA3-Enterprise/RADIUS mention. Still no TACACS+ CLI configuration anywhere in cisco-track (the module stays conceptual for TACACS+), so know the comparison from real course content, but expect to configure TACACS+ from outside knowledge if the exam asks for syntax.
+**RADIUS vs. TACACS+ comparison closed by ENSA 5.3** — encryption scope, transport, and AAA separation are now explicitly taught and compared, on top of SRWE-L13b's earlier passing WPA3-Enterprise/RADIUS mention.
+
+**TACACS+ CLI — outside-study addition** (no cisco-track lab backs this, added directly): the syntax deliberately parallels ENSA-L3's RADIUS/local-AAA pattern so you can map straight across —
+
+```
+tacacs server TAC1
+ address ipv4 10.1.1.1
+ key MyTacacsKey123
+!
+aaa new-model
+aaa group server tacacs+ TAC-GROUP
+ server name TAC1
+aaa authentication login default group TAC-GROUP local
+aaa authorization exec default group TAC-GROUP local
+```
+The `key` must match the shared secret configured on the TACACS+ server itself — same shared-secret model as RADIUS, just a different keyword (`key` here vs. `radius server` + `key` for RADIUS). `group TAC-GROUP local` is the fallback pattern: try the TACACS+ group first, fall back to the local database if the server's unreachable — same idea ENSA-L3 already drilled with `local` alone.
+
+**The comparison itself, worth having cold:** TACACS+ is Cisco-proprietary, **TCP port 49**, encrypts the **entire packet body**, and separates authentication/authorization/accounting into distinct processes — that's why it's the device-administration standard (different admins get different command-authorization levels). RADIUS is an open IETF standard, **UDP 1812/1813**, encrypts **only the password** in the packet (everything else is cleartext), and combines authentication+authorization into one step — that's why it's the WLAN/network-access standard (matches what SRWE-L13b already uses for 802.1X). If a question mentions **per-command authorization** or **device administration**, the answer is TACACS+; if it mentions **network access** or **802.1X**, the answer is RADIUS.
 
 ## ✅ Standard IPv4 ACLs: purpose, placement, wildcard masks
 
@@ -62,7 +79,13 @@ interface g0/1
 
 **c1 1.7**, **c3 3.12**, and **c3 3.13** consistently reinforce the same correct 2026 framing across all three touches: WPA3 is the default, WPA2 is the legacy fallback only for device-limited scenarios, never WEP, never Open. **SRWE-L13a/b** puts this into practice — WPA3-Personal (PSK) for a standard WLAN, then WPA3-Enterprise (802.1X, RADIUS-backed) for a VLAN-mapped enterprise WLAN, correctly distinguishing PSK from Enterprise auth.
 
-⚠️ **EAP itself is never named.** 802.1X is covered as the *framework* (port-based access control triggering RADIUS authentication), but the actual EAP methods the exam might reference (EAP-TLS, PEAP, EAP-FAST) don't appear — my notes get you to "802.1X hands off to a RADIUS server" without the EAP vocabulary layered on top.
+**EAP method names — outside-study addition** (no cisco-track lab backs this, added directly). 802.1X is the *framework* (port-based access control that hands authentication off to a RADIUS server); EAP is the *protocol family* that actually carries the authentication conversation inside that framework. Three methods the exam names directly:
+
+- **EAP-TLS** — certificate-based on **both** client and server. The strongest method (mutual cert auth means no password to steal), but requires a full PKI to issue and manage client certs — the deployment cost is the tradeoff.
+- **PEAP (Protected EAP)** — server-side certificate only; wraps a simpler inner authentication method (usually MSCHAPv2, i.e. a username/password) inside a TLS tunnel built from that server cert. Much easier to deploy than EAP-TLS since clients don't need their own certs, and it's the most common enterprise Wi-Fi method in practice.
+- **EAP-FAST** — Cisco-proprietary; replaces certificates entirely with a **PAC (Protected Access Credential)**, a shared secret provisioned to the client once. Faster/cheaper to deploy than EAP-TLS or PEAP since there's no PKI at all, at the cost of being Cisco-specific.
+
+Exam framing: if a question emphasizes **maximum security** and mentions certificates on both ends, that's EAP-TLS. If it emphasizes **easy enterprise deployment** with just a server cert, that's PEAP. If it's **Cisco-specific** and avoids PKI entirely, that's EAP-FAST.
 
 ## ⚠️ Remote access VPN concepts (site-to-site vs. remote-access, high level)
 
@@ -76,10 +99,10 @@ interface g0/1
 |---|---|
 | Core security concepts (threats/mitigation) | ✅ |
 | AAA concepts (A/A/A) | ✅ (closed by ENSA 5.3 — authentication/authorization configured, accounting still concept-only) |
-| Password/access policies, MFA, RADIUS vs. TACACS+ | ⚠️ (comparison closed by ENSA 5.3; TACACS+ CLI still ❌) |
+| Password/access policies, MFA, RADIUS vs. TACACS+ | ✅ (comparison via ENSA 5.3; TACACS+ CLI added directly below) |
 | Standard IPv4 ACLs, wildcard masks | ✅ (closed by ENSA 5.4) |
 | Layer 2 security (DHCP snooping, port security) | ✅ (only `shutdown` violation mode hands-on) |
-| WLAN security (WPA2/WPA3, EAP) | ✅ WPA2/WPA3 · ⚠️ EAP terminology missing |
+| WLAN security (WPA2/WPA3, EAP) | ✅ (EAP method names added directly below) |
 | Remote access VPN concepts | ⚠️ (closed at concept level by ENSA 5.3; no hands-on config) |
 
-**Real gaps left before test day:** TACACS+ CLI configuration and EAP method names (EAP-TLS, PEAP, EAP-FAST) — both still genuinely outside-study topics. Everything else in this domain, including ACLs and AAA (this domain's two biggest former holes), is now backed by real course content. Also still worth flagging: the cybersecurity-adjacent courses (CyberOps, Network Defense, etc.) remain a wishlist item on the homepage, not built content — that's a repo gap, not just a study gap.
+**No real gaps left in this domain.** TACACS+ CLI config and EAP method names (EAP-TLS, PEAP, EAP-FAST) were the last two outside-study items and are now written in above. The only remaining soft spot is VPN — concepts are covered (ENSA 5.3) but there's no hands-on config anywhere in cisco-track, matching the exam's own "high level" framing for this sub-topic. Still worth flagging: the cybersecurity-adjacent courses (Cybersecurity Associate, Network Defense, etc.) remain a wishlist item on the homepage, not built content — that's a repo gap, not a study gap, and outside this file's scope to fix.
