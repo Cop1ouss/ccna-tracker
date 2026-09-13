@@ -4,6 +4,7 @@
 
 **[Browse the guide →](https://cop1ouss.github.io/ccna-tracker/)**
 
+![Category](https://img.shields.io/badge/category-Networking%20%26%20Certs-0ea5e9)
 ![Exam](https://img.shields.io/badge/exam-200--301-38bdf8)
 ![Status](https://img.shields.io/badge/status-in--progress-fbbf24)
 ![Domains](https://img.shields.io/badge/domains-6%2F6-34d399)
@@ -78,5 +79,11 @@ references for Ansible/Terraform in the automation domain.
 
 **Video** — [Jeremy's IT Lab](https://www.youtube.com/@JeremysITLab) (primary), [NetworkChuck](https://www.youtube.com/@NetworkChuck) (fun supplement)
 **Hands-on** — Cisco Packet Tracer, [GNS3](https://www.gns3.com/) / [EVE-NG](https://www.eve-ng.net/)
-**Subnetting** — `scripts/subnet_drill.py`, [subnettingpractice.com](https://subnettingpractice.com/)
+**Subnetting** — `scripts/subnet_drill.py`, [subnettingpractice.com](https://subnettingpractice.com/) — see also the standalone [`subnet-calculator`](https://github.com/Cop1ouss/subnet-calculator)
 **CTF-style** — [TryHackMe](https://tryhackme.com/) networking rooms
+
+## Related
+
+Same "Networking & Certs" category as [`cisco-track`](https://github.com/Cop1ouss/cisco-track),
+[`secplus-tracker`](https://github.com/Cop1ouss/secplus-tracker), and
+[`subnet-calculator`](https://github.com/Cop1ouss/subnet-calculator).
