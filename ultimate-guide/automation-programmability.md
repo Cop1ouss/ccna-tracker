@@ -2,7 +2,7 @@
 
 ![Automation & Programmability](https://img.shields.io/badge/domain-Automation%20%26%20Programmability-fb923c) ![Weight](https://img.shields.io/badge/weight-10%25-fb923c)
 
-Synthesized from **ENSA** (c5) — this domain had no source material at all until Course 05 shipped. Skeleton is the checklist in [`boss-battles/06-automation-programmability.md`](../boss-battles/06-automation-programmability.md). Four of six sub-topics come from ENSA; Terraform and AI/ML in network ops are outside-study additions written in directly (marked as such below — no cisco-track lab backs them).
+Synthesized from **ENSA** (c5) — this domain had no source material at all until Course 05 shipped. Skeleton is the checklist in [`boss-battles/06-automation-programmability.md`](../boss-battles/06-automation-programmability.md). Four of six sub-topics come from ENSA; Terraform, AI/ML in network ops, overlay/underlay/fabric terminology, and REST API authentication types are outside-study additions written in directly (marked as such below — no cisco-track lab backs them; cross-checked against the current v1.1 blueprint's exact wording for domain 6.0).
 
 **Legend:** ✅ well covered · ⚠️ partial · ❌ gap
 
@@ -16,9 +16,13 @@ Still not taught head-on as its own objective (fewer manual CLI touches, config 
 
 **Closed by ENSA 5.8 (Network Architecture: Traditional vs. Controller-Based)** — a dedicated module now contrasts traditional device-by-device CLI management against controller-based/SDN, explains control/data-plane centralization, names northbound vs. southbound APIs (concept-level), and identifies Cisco's controller platforms (DNA Center / Catalyst Center, Meraki). **ENSA-L8** documents the operational tradeoff across a 10-device topology. This is the general SDN/controller-based-networking concept the blueprint means here — separate from the WLC-specific autonomous-vs-controller-based AP architecture already covered in `network-access.md`.
 
+⚠️ **Precise gap within this item:** the current v1.1 blueprint (6.3) names this sub-objective as *"overlay, underlay, and fabric"* specifically — none of those three words appear anywhere in this repo's source material. **Added directly** (not verified against a specific cisco-track lab step): the **underlay** is the physical network that actually moves packets (real links, real IP addressing between devices); the **overlay** is a logical network built on top of it via tunneling (e.g., VXLAN) so endpoints appear directly connected regardless of the physical topology underneath; a **fabric** is the whole system — underlay + overlay + the SDN controller automating both — that's the term Cisco uses for its own SD-Access architecture. Northbound/southbound APIs (already covered above) are the mechanism the controller uses to manage that fabric.
+
 ## ✅ REST-based APIs: CRUD operations, HTTP verbs (GET/POST/PUT/DELETE), common response codes
 
 **Closed by ENSA 5.9 (Network Automation & Programmability)** — GET/POST/PUT/DELETE and common response codes (200/401/404/500) are now taught, and **ENSA-L9a** makes it hands-on: register for a free Cisco DevNet Sandbox account and send a real GET request (via Postman or curl) to an always-on IOS-XE device, then read the JSON response. This also now sources `practice-questions` Q7's HTTP 404 question from real course material instead of the bank alone.
+
+⚠️ **Precise gap within this item:** the v1.1 blueprint (6.5) explicitly lists *"authentication types"* alongside CRUD/verbs/encoding — this repo has nothing on how a REST API call actually authenticates. **Added directly** (Cisco DevNet's API authentication guidance; not verified against a specific cisco-track lab step): three types the exam could reasonably reference — **Basic Auth** (username:password, base64-encoded in the `Authorization` header — simple but only as safe as the TLS session it rides on), **API keys/tokens** (a single opaque credential sent in a header or query param, e.g. `Authorization: Bearer <token>` — what ENSA-L9a's DevNet Sandbox call actually uses without naming the mechanism explicitly), and **OAuth2** (a token-issuing handshake, common for third-party/delegated access where you don't want to hand out the real credential at all). If a question asks *why* an unauthenticated GET to a real device API returns 401, the answer is a missing/invalid credential in one of these three forms.
 
 ## ✅ Configuration management tools: Ansible and Terraform
 
@@ -55,10 +59,10 @@ Exam framing: if the scenario describes the AI **creating** something (a config,
 | Sub-topic | Status |
 |---|---|
 | Automation's impact on network management | ⚠️ (practical substance covered via ENSA-L8; terminology not named) |
-| Traditional vs. controller-based/SDN | ✅ (closed by ENSA 5.8) |
-| REST APIs (CRUD, verbs, response codes) | ✅ (closed by ENSA 5.9) |
+| Traditional vs. controller-based/SDN | ⚠️ (closed by ENSA 5.8; overlay/underlay/fabric terminology ❌, added directly above) |
+| REST APIs (CRUD, verbs, response codes, auth types) | ⚠️ (CRUD/verbs/codes closed by ENSA 5.9; auth types ❌, added directly above) |
 | Ansible / Terraform | ✅ (Ansible via ENSA 5.9, Terraform added directly below) |
 | JSON encoding | ✅ (closed by ENSA 5.9 — real API response, not just app plumbing) |
 | AI/ML in network ops | ✅ (added directly below) |
 
-**No real gaps left in this domain.** The only soft spot is the first item — automation's operational impact has real practical substance via ENSA-L8, but the specific terms ("config drift," "intent-based networking") aren't named anywhere in cisco-track, so know those two words from outside material if a question uses them directly. Everything else — SDN/controller-based architecture, REST APIs, Ansible, Terraform, JSON, and AI/ML — now has real content, either from Course 05 or written in above. This went from the thinnest domain in the repo to a fully covered one.
+**Two precise blueprint sub-bullets were missing outright, now written in directly:** overlay/underlay/fabric terminology (v1.1 6.3) and REST API authentication types (v1.1 6.5) — neither appeared anywhere in cisco-track's source material, confirmed by grepping for the terms rather than assumed. The other soft spot is unchanged — automation's operational impact has real practical substance via ENSA-L8, but the specific terms ("config drift," "intent-based networking") aren't named anywhere in cisco-track, so know those two words from outside material if a question uses them directly. Ansible, Terraform, JSON, and AI/ML remain fully covered, either from Course 05 or written in directly.

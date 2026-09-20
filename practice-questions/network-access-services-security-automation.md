@@ -274,6 +274,29 @@ The value of the `"vlan"` key — `10`. Reading JSON is just matching a key
 name to its value; here the interface is up and assigned to VLAN 10.
 </details>
 
+**Q29.** A script sends a GET request to a controller's REST API without
+including any credentials and gets back HTTP 401. What's the most likely
+fix, and name two different forms that fix could take?
+<details><summary>Answer</summary>
+Add authentication to the request. Two common forms: **Basic Auth**
+(username:password, base64-encoded in the `Authorization` header) or an
+**API key/token** (a single credential sent as `Authorization: Bearer
+<token>` or a header/query param). A third exists for delegated
+third-party access — **OAuth2**, a token-issuing handshake — but isn't
+needed for a simple direct script-to-controller call like this one.
+</details>
+
+**Q30.** In an SD-Access-style fabric, what's the difference between the
+underlay and the overlay?
+<details><summary>Answer</summary>
+The underlay is the physical network — real links, real IP addressing
+between devices — that actually forwards packets. The overlay is a
+logical network built on top of it via tunneling (e.g. VXLAN), so
+endpoints appear directly connected to each other regardless of how many
+physical hops actually separate them. The controller automating both
+together is what makes the whole system a "fabric."
+</details>
+
 ---
 
 *Add your own missed-question entries to the relevant boss-battle file, not here — this file is a static question bank.*
