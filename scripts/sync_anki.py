@@ -16,6 +16,7 @@ No dependencies beyond the standard library.
 
 import argparse
 import csv
+import html
 import json
 import pathlib
 import sys
@@ -48,9 +49,17 @@ def escape_query_value(value):
 
 
 def read_cards(csv_path):
+    # AnkiConnect stores field content as raw HTML, so escape &/</> once here —
+    # every downstream use (search query, diff comparison, addNote) then stays
+    # consistent with what's actually stored in Anki. No current card needs
+    # this (checked), but a future one with e.g. "port < 1024" would otherwise
+    # render broken.
     with open(csv_path, newline="", encoding="utf-8") as f:
         reader = csv.DictReader(f)
-        return [(row["Front"].strip(), row["Back"].strip()) for row in reader if row.get("Front")]
+        return [
+            (html.escape(row["Front"].strip(), quote=False), html.escape(row["Back"].strip(), quote=False))
+            for row in reader if row.get("Front")
+        ]
 
 
 def main():
