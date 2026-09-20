@@ -223,6 +223,11 @@ installed when the primary route disappears from the table, giving clean
 primary/backup failover instead of both paths being active at once.
 </details>
 
+**Q24.** Three routers share a broadcast multi-access OSPF segment. R1 has priority 100 (the elected DR), R2 has priority 50, R3 has priority 0. A fourth router, R4, joins the segment with priority 255 — higher than everyone already there. What happens to the DR role?
+<details><summary>Answer</summary>
+Nothing — R1 stays DR. OSPF's DR/BDR election is non-preemptive: once elected, a higher-priority router joining later does not trigger a re-election, no matter how high its priority is. It only takes effect on the *next* election (e.g., if R1 goes down). Separately, R3's priority 0 means it can never become DR or BDR, on this election or any future one.
+</details>
+
 ---
 
 *Add your own missed-question entries to the relevant boss-battle file, not here — this file is a static question bank.*

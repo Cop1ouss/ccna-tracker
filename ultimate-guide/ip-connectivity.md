@@ -48,9 +48,35 @@ Verification pattern is consistent throughout: `show ip route` / `show ipv6 rout
 
 **Closed by ENSA 5.1–5.2.** Previously the largest single gap in the repo — c2/c3 only ever mentioned OSPF as an optional stretch-goal on NE-L9 and SRWE-CAP, never as guided instruction. Course 05's **5.1 (Single-Area OSPFv2 Concepts)** now teaches the neighbor state machine (Down → Init → 2-Way → ExStart → Exchange → Loading → Full), why DR/BDR election happens on multi-access segments, router-ID selection order, and when a passive interface is the right call — with **ENSA-L1** stepping through adjacency formation packet-by-packet in Simulation mode. **5.2 (Configuration & Verification)** takes it hands-on: `router ospf` + `network` + wildcard mask, manual router-id/priority tuning, `passive-interface`/`passive-interface default` — drilled across **ENSA-L2a** (basic three-router single-area OSPF) and **ENSA-L2b** (passive interfaces + router-ID control via loopbacks + forced DR/BDR election). The old NE-L9/SRWE-CAP "swap static for OSPF" stretch goals are now backed by real guided content instead of being pure outside-study prompts.
 
+Base config syntax (Cisco IOS OSPF command reference):
+
+```
+router ospf 1
+ network 10.0.12.0 0.0.0.3 area 0
+ router-id 1.1.1.1
+ passive-interface default
+ no passive-interface g0/0
+!
+interface g0/0
+ ip ospf priority 200
+```
+
+**DR/BDR election mechanics and router-ID selection order — added directly** (Cisco IOS OSPF command reference + RFC 2328 §9.4; the concepts and lab steps are ENSA-sourced per above, but this exact mechanic isn't spelled out in the ultimate-guide prose itself, so it's written in here rather than assumed):
+
+- **Router ID**, if not set with `router-id`, is chosen when the OSPF process first starts: highest IP among **active loopback interfaces** if any exist, otherwise highest IP among active physical interfaces. It does **not** change automatically afterward — bringing up a higher-IP loopback later has no effect until the OSPF process is cleared/reloaded. This is exactly why a dedicated loopback is the standard practice: it's stable (never goes down with a physical link) and puts the router ID under deliberate control instead of whatever interface happens to have the highest IP.
+- **DR/BDR election** happens only on broadcast/NBMA multi-access segments (never on point-to-point links, which have only two possible neighbors and go straight to FULL). The router with the **highest OSPF interface priority** (`ip ospf priority`, default **1**, range 0–255) becomes DR; **priority 0 takes a router out of DR/BDR eligibility entirely**, permanently DROTHER. Ties are broken by **highest router ID**. Critically, the election is **non-preemptive**: once a DR/BDR is elected, a new router joining the segment later — even with a higher priority — does **not** trigger a re-election. It only takes effect on the next election (e.g., the current DR going down).
+
 ## ✅ OSPF verification: `show ip ospf neighbor`, `show ip route ospf`, `show ip protocols`
 
 Also closed by ENSA 5.2 — all three commands are named explicitly in the module's objectives and topics list, and verified end-to-end in ENSA-L2a/L2b (full adjacency + complete routing table) plus the ENSA capstone (5.10), which layers OSPF across 3+ routers alongside ACLs and NAT on one topology.
+
+```
+show ip ospf neighbor
+show ip route ospf
+show ip protocols
+```
+
+**Reading `show ip ospf neighbor` — added directly** (Cisco's OSPF neighbor-states troubleshooting doc): the `State` column is what matters most. On a broadcast multi-access segment, a router only reaches **FULL** with the DR and BDR — every other neighbor legitimately parks at **2-WAY** by design (that's `practice-questions` Q5, not a fault). On a point-to-point link, every neighbor should reach FULL since there's no DR/BDR to route traffic through. A neighbor stuck in **EXSTART/EXCHANGE** past the initial handshake is the classic **MTU mismatch** symptom — the two sides get through Hello-based discovery fine but stall exchanging Database Description packets once the payload would exceed one side's configured MTU (`practice-questions` Q17).
 
 ## ✅ First-hop redundancy: HSRP concepts (active/standby, priority, preemption)
 
