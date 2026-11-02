@@ -1,14 +1,22 @@
-![CCNA Tracker banner](assets/banner.svg)
+<picture>
+  <source media="(prefers-color-scheme: dark)" srcset="assets/banner-dark.svg">
+  <img alt="ccna-tracker banner" src="assets/banner-light.svg" width="100%">
+</picture>
 
-# CCNA Tracker — Study & Test Prep Repo
+<p align="center">
+  <a href="https://cop1ouss.github.io/ccna-tracker/"><img alt="Browse the guide" src="https://img.shields.io/badge/%E2%96%B6%20browse%20the%20guide-live%20on%20GitHub%20Pages-89dceb?style=for-the-badge&labelColor=1e1e2e"></a>
+</p>
+<p align="center">
+  <img alt="exam: 200-301" src="https://img.shields.io/badge/exam-200--301-89dceb?style=flat-square&labelColor=1e1e2e">
+  <img alt="domains: 6/6" src="https://img.shields.io/badge/domains-6%2F6-a6e3a1?style=flat-square&labelColor=1e1e2e">
+  <img alt="status: in progress" src="https://img.shields.io/badge/status-in%20progress-f9e2af?style=flat-square&labelColor=1e1e2e">
+  <img alt="labs: Packet Tracer · GNS3" src="https://img.shields.io/badge/labs-Packet%20Tracer%20%C2%B7%20GNS3-89dceb?style=flat-square&labelColor=1e1e2e">
+</p>
 
-**[Browse the guide →](https://cop1ouss.github.io/ccna-tracker/)**
-
-![Category](https://img.shields.io/badge/category-Networking%20%26%20Certs-0ea5e9)
-![Exam](https://img.shields.io/badge/exam-200--301-38bdf8)
-![Status](https://img.shields.io/badge/status-in--progress-fbbf24)
-![Domains](https://img.shields.io/badge/domains-6%2F6-34d399)
-![Made with](https://img.shields.io/badge/built%20with-Claude%20Code-a78bfa)
+<p align="center">
+  <a href="https://cop1ouss.github.io/ccna-tracker/"><img alt="ccna-tracker on desktop" src="assets/screenshot-desktop.png" width="72%"></a>
+  <a href="https://cop1ouss.github.io/ccna-tracker/"><img alt="ccna-tracker on a phone" src="assets/screenshot-phone.png" width="22%"></a>
+</p>
 
 Companion to [`cisco-track`](https://github.com/Cop1ouss/cisco-track) — that repo
 holds the Jeremy's IT Lab notes and Cisco Networking Academy coursework. This one
@@ -87,3 +95,7 @@ references for Ansible/Terraform in the automation domain.
 Same "Networking & Certs" category as [`cisco-track`](https://github.com/Cop1ouss/cisco-track),
 [`secplus-tracker`](https://github.com/Cop1ouss/secplus-tracker), and
 [`subnet-calculator`](https://github.com/Cop1ouss/subnet-calculator).
+
+---
+
+<p align="center"><sub>Built by <a href="https://github.com/Cop1ouss">Dajoni Gomez</a> · part of the <a href="https://cop1ouss.github.io/Cop1ouss/">Uncook</a> journey log</sub></p>
