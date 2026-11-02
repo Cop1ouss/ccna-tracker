@@ -1,14 +1,24 @@
-![CCNA Tracker banner](assets/banner.svg)
+<picture>
+  <source media="(prefers-color-scheme: dark)" srcset=".github/readme/banner-dark.svg">
+  <source media="(prefers-color-scheme: light)" srcset=".github/readme/banner-light.svg">
+  <img alt="ccna-tracker" src=".github/readme/banner-dark.svg" width="100%">
+</picture>
 
-# CCNA Tracker — Study & Test Prep Repo
+<p align="center">
+  <a href="https://cop1ouss.github.io/ccna-tracker/"><img alt="Browse the guide →" src="https://img.shields.io/badge/Browse%20the%20guide%20%E2%86%92-89dceb?style=for-the-badge&labelColor=1e1e2e"></a>
+</p>
+<p align="center">
+  <img alt="CCNA 200-301" src="https://img.shields.io/badge/CCNA%20200--301-1e1e2e?style=flat-square&logo=cisco&logoColor=89dceb">
+  <img alt="Packet Tracer" src="https://img.shields.io/badge/Packet%20Tracer-1e1e2e?style=flat-square&logo=cisco&logoColor=89b4fa">
+  <img alt="GNS3" src="https://img.shields.io/badge/GNS3-1e1e2e?style=flat-square&labelColor=a6e3a1">
+  <img alt="TryHackMe" src="https://img.shields.io/badge/TryHackMe-1e1e2e?style=flat-square&logo=tryhackme&logoColor=f38ba8">
+</p>
 
-**[Browse the guide →](https://cop1ouss.github.io/ccna-tracker/)**
-
-![Category](https://img.shields.io/badge/category-Networking%20%26%20Certs-0ea5e9)
-![Exam](https://img.shields.io/badge/exam-200--301-38bdf8)
-![Status](https://img.shields.io/badge/status-in--progress-fbbf24)
-![Domains](https://img.shields.io/badge/domains-6%2F6-34d399)
-![Made with](https://img.shields.io/badge/built%20with-Claude%20Code-a78bfa)
+<p align="center">
+  <img alt="Desktop view" src=".github/readme/screenshot-desktop.png" width="74%">
+  &nbsp;
+  <img alt="Phone view" src=".github/readme/screenshot-phone.png" width="21%">
+</p>
 
 Companion to [`cisco-track`](https://github.com/Cop1ouss/cisco-track) — that repo
 holds the Jeremy's IT Lab notes and Cisco Networking Academy coursework. This one
@@ -87,3 +97,7 @@ references for Ansible/Terraform in the automation domain.
 Same "Networking & Certs" category as [`cisco-track`](https://github.com/Cop1ouss/cisco-track),
 [`secplus-tracker`](https://github.com/Cop1ouss/secplus-tracker), and
 [`subnet-calculator`](https://github.com/Cop1ouss/subnet-calculator).
+
+---
+
+<p align="center"><sub>Part of <a href="https://github.com/Cop1ouss">Uncook</a> · built off systems · © 2026 Dajoni Gomez</sub></p>
