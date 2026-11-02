@@ -7,6 +7,9 @@
   <a href="https://cop1ouss.github.io/ccna-tracker/"><img alt="Browse the guide" src="https://img.shields.io/badge/%E2%96%B6%20browse%20the%20guide-live%20on%20GitHub%20Pages-89dceb?style=for-the-badge&labelColor=1e1e2e"></a>
 </p>
 <p align="center">
+  <a href="https://github.com/Cop1ouss/ccna-tracker/actions/workflows/ci.yml"><img alt="CI" src="https://img.shields.io/github/actions/workflow/status/Cop1ouss/ccna-tracker/ci.yml?style=flat-square&label=CI&labelColor=1e1e2e&color=a6e3a1"></a>
+  <a href="https://github.com/Cop1ouss/ccna-tracker/actions/workflows/codeql.yml"><img alt="CodeQL" src="https://img.shields.io/github/actions/workflow/status/Cop1ouss/ccna-tracker/codeql.yml?style=flat-square&label=CodeQL&labelColor=1e1e2e&color=89b4fa"></a>
+  <a href="SECURITY.md"><img alt="Security policy" src="https://img.shields.io/badge/security-policy-f38ba8?style=flat-square&labelColor=1e1e2e"></a>
   <img alt="exam: 200-301" src="https://img.shields.io/badge/exam-200--301-89dceb?style=flat-square&labelColor=1e1e2e">
   <img alt="domains: 6/6" src="https://img.shields.io/badge/domains-6%2F6-a6e3a1?style=flat-square&labelColor=1e1e2e">
   <img alt="status: in progress" src="https://img.shields.io/badge/status-in%20progress-f9e2af?style=flat-square&labelColor=1e1e2e">
@@ -87,14 +90,23 @@ references for Ansible/Terraform in the automation domain.
 
 **Video** — [Jeremy's IT Lab](https://www.youtube.com/@JeremysITLab) (primary), [NetworkChuck](https://www.youtube.com/@NetworkChuck) (fun supplement)
 **Hands-on** — Cisco Packet Tracer, [GNS3](https://www.gns3.com/) / [EVE-NG](https://www.eve-ng.net/)
-**Subnetting** — `scripts/subnet_drill.py`, [subnettingpractice.com](https://subnettingpractice.com/) — see also the standalone [`subnet-calculator`](https://github.com/Cop1ouss/subnet-calculator)
+**Subnetting** — `scripts/subnet_drill.py`, [subnettingpractice.com](https://subnettingpractice.com/)
 **CTF-style** — [TryHackMe](https://tryhackme.com/) networking rooms
 
 ## Related
 
-Same "Networking & Certs" category as [`cisco-track`](https://github.com/Cop1ouss/cisco-track),
-[`secplus-tracker`](https://github.com/Cop1ouss/secplus-tracker), and
-[`subnet-calculator`](https://github.com/Cop1ouss/subnet-calculator).
+Same "Networking & Certs" category as [`cisco-track`](https://github.com/Cop1ouss/cisco-track) and
+[`secplus-tracker`](https://github.com/Cop1ouss/secplus-tracker).
+
+
+## Project docs
+
+| | |
+| --- | --- |
+| 📋 [PRD](docs/PRD.md) | The problem, the goal, scope and the finish line |
+| 🛡️ [Security policy](SECURITY.md) | How to report a vulnerability privately |
+| ⚖️ [License](LICENSE) | MIT |
+| 🧪 [CI](.github/workflows/ci.yml) | What runs on every pull request |
 
 ---
 
